@@ -1,0 +1,245 @@
+--- libquadmath/Makefile.am.jj	2011-09-21 18:09:52.000000000 +0200
++++ libquadmath/Makefile.am	2012-02-22 09:33:07.273598713 +0100
+@@ -34,15 +34,19 @@ version_dep =
+ endif
+ 
+ toolexeclib_LTLIBRARIES = libquadmath.la
++noinst_LTLIBRARIES = libquadmathconvenience.la
+ libquadmath_la_LIBADD = 
+ libquadmath_la_LDFLAGS = -version-info `grep -v '^\#' $(srcdir)/libtool-version` \
+ 			 $(version_arg) $(lt_host_flags) -lm
+ libquadmath_la_DEPENDENCIES = $(version_dep) $(libquadmath_la_LIBADD)
++libquadmathconvenience_la_LIBADD =
++libquadmathconvenience_la_LDFLAGS =
++libquadmathconvenience_la_DEPENDENCIES =
+ 
+ nodist_libsubinclude_HEADERS = quadmath.h quadmath_weak.h
+ libsubincludedir = $(libdir)/gcc/$(target_alias)/$(gcc_version)/include
+ 
+-libquadmath_la_SOURCES = \
++sources = \
+   math/acoshq.c math/fmodq.c math/acosq.c math/frexpq.c \
+   math/rem_pio2q.c math/asinhq.c math/hypotq.c math/remainderq.c \
+   math/asinq.c math/rintq.c math/atan2q.c math/isinfq.c \
+@@ -65,7 +69,8 @@ libquadmath_la_SOURCES = \
+   printf/mul_n.c printf/mul.c printf/printf_fphex.c printf/printf_fp.c \
+   printf/quadmath-printf.c printf/rshift.c printf/submul_1.c printf/sub_n.c \
+   strtod/strtoflt128.c strtod/mpn2flt128.c strtod/tens_in_limb.c
+-
++libquadmath_la_SOURCES = $(sources)
++libquadmathconvenience_la_SOURCES = $(sources)
+ 
+ # Work around what appears to be a GNU make bug handling MAKEFLAGS
+ # values defined in terms of make variables, as is the case for CC and
+--- libquadmath/Makefile.in.jj	2011-09-21 18:09:52.000000000 +0200
++++ libquadmath/Makefile.in	2012-02-22 09:33:28.816805244 +0100
+@@ -37,6 +37,7 @@ build_triplet = @build@
+ host_triplet = @host@
+ target_triplet = @target@
+ @BUILD_LIBQUADMATH_FALSE@libquadmath_la_DEPENDENCIES =
++@BUILD_LIBQUADMATH_FALSE@libquadmathconvenience_la_DEPENDENCIES =
+ subdir = .
+ DIST_COMMON = ChangeLog $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
+ 	$(top_srcdir)/configure $(am__configure_deps) \
+@@ -85,50 +86,49 @@ am__base_list = \
+   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
+ am__installdirs = "$(DESTDIR)$(toolexeclibdir)" "$(DESTDIR)$(infodir)" \
+ 	"$(DESTDIR)$(libsubincludedir)"
+-LTLIBRARIES = $(toolexeclib_LTLIBRARIES)
++LTLIBRARIES = $(noinst_LTLIBRARIES) $(toolexeclib_LTLIBRARIES)
+ am__dirstamp = $(am__leading_dot)dirstamp
+-@BUILD_LIBQUADMATH_TRUE@am_libquadmath_la_OBJECTS = math/acoshq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/fmodq.lo math/acosq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/frexpq.lo math/rem_pio2q.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/asinhq.lo math/hypotq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/remainderq.lo math/asinq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/rintq.lo math/atan2q.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/isinfq.lo math/roundq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/atanhq.lo math/isnanq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/scalblnq.lo math/atanq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/j0q.lo math/scalbnq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/cbrtq.lo math/j1q.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/signbitq.lo math/ceilq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/jnq.lo math/sincos_table.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/complex.lo math/ldexpq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/sincosq.lo math/copysignq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/lgammaq.lo math/sincosq_kernel.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/coshq.lo math/llroundq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/sinhq.lo math/cosq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/log10q.lo math/sinq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/cosq_kernel.lo math/log1pq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/sinq_kernel.lo math/erfq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/logq.lo math/sqrtq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/expm1q.lo math/lroundq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/tanhq.lo math/expq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/modfq.lo math/tanq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/fabsq.lo math/nanq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/tgammaq.lo math/finiteq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/nextafterq.lo math/truncq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/floorq.lo math/powq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/fmaq.lo math/cacoshq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/cacosq.lo math/casinhq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/casinq.lo math/catanhq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/catanq.lo math/cimagq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/conjq.lo math/cprojq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/crealq.lo math/fdimq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/fmaxq.lo math/fminq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/ilogbq.lo math/llrintq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/log2q.lo math/lrintq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	math/nearbyintq.lo math/remquoq.lo \
+-@BUILD_LIBQUADMATH_TRUE@	printf/addmul_1.lo printf/add_n.lo \
+-@BUILD_LIBQUADMATH_TRUE@	printf/cmp.lo printf/divrem.lo \
+-@BUILD_LIBQUADMATH_TRUE@	printf/flt1282mpn.lo \
++@BUILD_LIBQUADMATH_TRUE@am__objects_1 = math/acoshq.lo math/fmodq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/acosq.lo math/frexpq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/rem_pio2q.lo math/asinhq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/hypotq.lo math/remainderq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/asinq.lo math/rintq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/atan2q.lo math/isinfq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/roundq.lo math/atanhq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/isnanq.lo math/scalblnq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/atanq.lo math/j0q.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/scalbnq.lo math/cbrtq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/j1q.lo math/signbitq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/ceilq.lo math/jnq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/sincos_table.lo math/complex.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/ldexpq.lo math/sincosq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/copysignq.lo math/lgammaq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/sincosq_kernel.lo math/coshq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/llroundq.lo math/sinhq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/cosq.lo math/log10q.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/sinq.lo math/cosq_kernel.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/log1pq.lo math/sinq_kernel.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/erfq.lo math/logq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/sqrtq.lo math/expm1q.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/lroundq.lo math/tanhq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/expq.lo math/modfq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/tanq.lo math/fabsq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/nanq.lo math/tgammaq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/finiteq.lo math/nextafterq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/truncq.lo math/floorq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/powq.lo math/fmaq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/cacoshq.lo math/cacosq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/casinhq.lo math/casinq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/catanhq.lo math/catanq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/cimagq.lo math/conjq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/cprojq.lo math/crealq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/fdimq.lo math/fmaxq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/fminq.lo math/ilogbq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/llrintq.lo math/log2q.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/lrintq.lo math/nearbyintq.lo \
++@BUILD_LIBQUADMATH_TRUE@	math/remquoq.lo printf/addmul_1.lo \
++@BUILD_LIBQUADMATH_TRUE@	printf/add_n.lo printf/cmp.lo \
++@BUILD_LIBQUADMATH_TRUE@	printf/divrem.lo printf/flt1282mpn.lo \
+ @BUILD_LIBQUADMATH_TRUE@	printf/fpioconst.lo printf/lshift.lo \
+ @BUILD_LIBQUADMATH_TRUE@	printf/mul_1.lo printf/mul_n.lo \
+ @BUILD_LIBQUADMATH_TRUE@	printf/mul.lo printf/printf_fphex.lo \
+@@ -138,12 +138,22 @@ am__dirstamp = $(am__leading_dot)dirstam
+ @BUILD_LIBQUADMATH_TRUE@	printf/sub_n.lo strtod/strtoflt128.lo \
+ @BUILD_LIBQUADMATH_TRUE@	strtod/mpn2flt128.lo \
+ @BUILD_LIBQUADMATH_TRUE@	strtod/tens_in_limb.lo
++@BUILD_LIBQUADMATH_TRUE@am_libquadmath_la_OBJECTS = $(am__objects_1)
+ libquadmath_la_OBJECTS = $(am_libquadmath_la_OBJECTS)
+ libquadmath_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+ 	$(libquadmath_la_LDFLAGS) $(LDFLAGS) -o $@
+ @BUILD_LIBQUADMATH_TRUE@am_libquadmath_la_rpath = -rpath \
+ @BUILD_LIBQUADMATH_TRUE@	$(toolexeclibdir)
++@BUILD_LIBQUADMATH_TRUE@am_libquadmathconvenience_la_OBJECTS =  \
++@BUILD_LIBQUADMATH_TRUE@	$(am__objects_1)
++libquadmathconvenience_la_OBJECTS =  \
++	$(am_libquadmathconvenience_la_OBJECTS)
++libquadmathconvenience_la_LINK = $(LIBTOOL) --tag=CC \
++	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
++	$(AM_CFLAGS) $(CFLAGS) $(libquadmathconvenience_la_LDFLAGS) \
++	$(LDFLAGS) -o $@
++@BUILD_LIBQUADMATH_TRUE@am_libquadmathconvenience_la_rpath =
+ DEFAULT_INCLUDES = -I.@am__isrc@
+ depcomp = $(SHELL) $(top_srcdir)/../depcomp
+ am__depfiles_maybe = depfiles
+@@ -157,7 +167,8 @@ CCLD = $(CC)
+ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+ 	$(LDFLAGS) -o $@
+-SOURCES = $(libquadmath_la_SOURCES)
++SOURCES = $(libquadmath_la_SOURCES) \
++	$(libquadmathconvenience_la_SOURCES)
+ MULTISRCTOP = 
+ MULTIBUILDTOP = 
+ MULTIDIRS = 
+@@ -313,14 +324,18 @@ AUTOMAKE_OPTIONS = 1.8 foreign
+ @BUILD_LIBQUADMATH_TRUE@@LIBQUAD_USE_SYMVER_GNU_TRUE@@LIBQUAD_USE_SYMVER_TRUE@version_dep = $(srcdir)/quadmath.map
+ @BUILD_LIBQUADMATH_TRUE@@LIBQUAD_USE_SYMVER_SUN_TRUE@@LIBQUAD_USE_SYMVER_TRUE@version_dep = quadmath.map-sun
+ @BUILD_LIBQUADMATH_TRUE@toolexeclib_LTLIBRARIES = libquadmath.la
++@BUILD_LIBQUADMATH_TRUE@noinst_LTLIBRARIES = libquadmathconvenience.la
+ @BUILD_LIBQUADMATH_TRUE@libquadmath_la_LIBADD = 
+ @BUILD_LIBQUADMATH_TRUE@libquadmath_la_LDFLAGS = -version-info `grep -v '^\#' $(srcdir)/libtool-version` \
+ @BUILD_LIBQUADMATH_TRUE@			 $(version_arg) $(lt_host_flags) -lm
+ 
+ @BUILD_LIBQUADMATH_TRUE@libquadmath_la_DEPENDENCIES = $(version_dep) $(libquadmath_la_LIBADD)
++@BUILD_LIBQUADMATH_TRUE@libquadmathconvenience_la_LIBADD = 
++@BUILD_LIBQUADMATH_TRUE@libquadmathconvenience_la_LDFLAGS = 
++@BUILD_LIBQUADMATH_TRUE@libquadmathconvenience_la_DEPENDENCIES = 
+ @BUILD_LIBQUADMATH_TRUE@nodist_libsubinclude_HEADERS = quadmath.h quadmath_weak.h
+ @BUILD_LIBQUADMATH_TRUE@libsubincludedir = $(libdir)/gcc/$(target_alias)/$(gcc_version)/include
+-@BUILD_LIBQUADMATH_TRUE@libquadmath_la_SOURCES = \
++@BUILD_LIBQUADMATH_TRUE@sources = \
+ @BUILD_LIBQUADMATH_TRUE@  math/acoshq.c math/fmodq.c math/acosq.c math/frexpq.c \
+ @BUILD_LIBQUADMATH_TRUE@  math/rem_pio2q.c math/asinhq.c math/hypotq.c math/remainderq.c \
+ @BUILD_LIBQUADMATH_TRUE@  math/asinq.c math/rintq.c math/atan2q.c math/isinfq.c \
+@@ -344,6 +359,8 @@ AUTOMAKE_OPTIONS = 1.8 foreign
+ @BUILD_LIBQUADMATH_TRUE@  printf/quadmath-printf.c printf/rshift.c printf/submul_1.c printf/sub_n.c \
+ @BUILD_LIBQUADMATH_TRUE@  strtod/strtoflt128.c strtod/mpn2flt128.c strtod/tens_in_limb.c
+ 
++@BUILD_LIBQUADMATH_TRUE@libquadmath_la_SOURCES = $(sources)
++@BUILD_LIBQUADMATH_TRUE@libquadmathconvenience_la_SOURCES = $(sources)
+ 
+ # Work around what appears to be a GNU make bug handling MAKEFLAGS
+ # values defined in terms of make variables, as is the case for CC and
+@@ -467,6 +484,15 @@ $(srcdir)/config.h.in: @MAINTAINER_MODE_
+ 
+ distclean-hdr:
+ 	-rm -f config.h stamp-h1
++
++clean-noinstLTLIBRARIES:
++	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
++	@list='$(noinst_LTLIBRARIES)'; for p in $$list; do \
++	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
++	  test "$$dir" != "$$p" || dir=.; \
++	  echo "rm -f \"$${dir}/so_locations\""; \
++	  rm -f "$${dir}/so_locations"; \
++	done
+ install-toolexeclibLTLIBRARIES: $(toolexeclib_LTLIBRARIES)
+ 	@$(NORMAL_INSTALL)
+ 	test -z "$(toolexeclibdir)" || $(MKDIR_P) "$(DESTDIR)$(toolexeclibdir)"
+@@ -638,6 +664,8 @@ strtod/tens_in_limb.lo: strtod/$(am__dir
+ 	strtod/$(DEPDIR)/$(am__dirstamp)
+ libquadmath.la: $(libquadmath_la_OBJECTS) $(libquadmath_la_DEPENDENCIES) 
+ 	$(libquadmath_la_LINK) $(am_libquadmath_la_rpath) $(libquadmath_la_OBJECTS) $(libquadmath_la_LIBADD) $(LIBS)
++libquadmathconvenience.la: $(libquadmathconvenience_la_OBJECTS) $(libquadmathconvenience_la_DEPENDENCIES) 
++	$(libquadmathconvenience_la_LINK) $(am_libquadmathconvenience_la_rpath) $(libquadmathconvenience_la_OBJECTS) $(libquadmathconvenience_la_LIBADD) $(LIBS)
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+@@ -1226,7 +1254,8 @@ maintainer-clean-generic:
+ clean: clean-am clean-multi
+ 
+ clean-am: clean-aminfo clean-generic clean-libtool \
+-	clean-toolexeclibLTLIBRARIES mostlyclean-am
++	clean-noinstLTLIBRARIES clean-toolexeclibLTLIBRARIES \
++	mostlyclean-am
+ 
+ distclean: distclean-am distclean-multi
+ 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
+@@ -1382,8 +1411,9 @@ uninstall-am: uninstall-dvi-am uninstall
+ 
+ .PHONY: CTAGS GTAGS all all-am all-local all-multi am--refresh check \
+ 	check-am clean clean-aminfo clean-generic clean-libtool \
+-	clean-multi clean-toolexeclibLTLIBRARIES ctags dist-info \
+-	distclean distclean-compile distclean-generic distclean-hdr \
++	clean-multi clean-noinstLTLIBRARIES \
++	clean-toolexeclibLTLIBRARIES ctags dist-info distclean \
++	distclean-compile distclean-generic distclean-hdr \
+ 	distclean-libtool distclean-multi distclean-tags dvi dvi-am \
+ 	html html-am info info-am install install-am install-data \
+ 	install-data-am install-dvi install-dvi-am install-exec \

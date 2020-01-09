@@ -1,0 +1,413 @@
+--- ppl-0.10.1/src/Makefile.in.jj	2009-04-14 07:08:46.000000000 +0200
++++ ppl-0.10.1/src/Makefile.in	2009-06-04 12:43:19.000000000 +0200
+@@ -138,7 +138,7 @@ am__strip_dir = `echo $$p | sed -e 's|^.
+ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
+ 	"$(DESTDIR)$(includedir)"
+ libLTLIBRARIES_INSTALL = $(INSTALL)
+-LTLIBRARIES = $(lib_LTLIBRARIES)
++LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES)
+ libppl_la_DEPENDENCIES =
+ am__libppl_la_SOURCES_DIST = Box.cc checked.cc Checked_Number.cc \
+ 	Float.cc fpu-ia32.cc Constraint.cc Constraint_System.cc \
+@@ -273,6 +273,137 @@ libppl_la_OBJECTS = $(am_libppl_la_OBJEC
+ libppl_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+ 	$(CXXFLAGS) $(libppl_la_LDFLAGS) $(LDFLAGS) -o $@
++am__DEPENDENCIES_1 =
++libppl_convenience_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
++am__libppl_convenience_la_SOURCES_DIST = Box.cc checked.cc \
++	Checked_Number.cc Float.cc fpu-ia32.cc Constraint.cc \
++	Constraint_System.cc Congruence.cc Congruence_System.cc \
++	Generator_System.cc Grid_Generator_System.cc Generator.cc \
++	Grid_Generator.cc Init.cc Coefficient.cc Linear_Expression.cc \
++	Linear_System.cc Matrix.cc Scalar_Products.cc MIP_Problem.cc \
++	Poly_Con_Relation.cc Poly_Gen_Relation.cc \
++	BHRZ03_Certificate.cc H79_Certificate.cc Grid_Certificate.cc \
++	Polyhedron_nonpublic.cc Polyhedron_public.cc \
++	Polyhedron_chdims.cc Polyhedron_widenings.cc C_Polyhedron.cc \
++	NNC_Polyhedron.cc Grid_nonpublic.cc Grid_public.cc \
++	Grid_chdims.cc Grid_widenings.cc BD_Shape.cc \
++	Octagonal_Shape.cc Pointset_Powerset.cc Row.cc Linear_Row.cc \
++	Bit_Matrix.cc Bit_Row.cc Ph_Status.cc Grid_Status.cc \
++	Variable.cc Variables_Set.cc conversion.cc minimize.cc \
++	simplify.cc Grid_conversion.cc Grid_simplify.cc stdiobuf.cc \
++	c_streambuf.cc globals.cc mp_std_bits.cc version.cc \
++	namespaces.hh compiler.hh meta_programming.hh Slow_Copy.hh \
++	Has_Assign_Or_Swap.hh assign_or_swap.hh mp_std_bits.defs.hh \
++	mp_std_bits.inlines.hh Temp.defs.hh Temp.inlines.hh \
++	Temp.templates.hh Coefficient_traits_template.hh \
++	Checked_Number.types.hh GMP_Integer.types.hh \
++	Coefficient.types.hh stdiobuf.types.hh c_streambuf.types.hh \
++	globals.types.hh iterator_to_const.types.hh distances.types.hh \
++	Interval_Info.types.hh Interval.types.hh Box.types.hh \
++	Constraint.types.hh Generator.types.hh Grid_Generator.types.hh \
++	Congruence.types.hh Init.types.hh Row.types.hh \
++	Linear_Row.types.hh Matrix.types.hh Variable.types.hh \
++	Variables_Set.types.hh Linear_Expression.types.hh \
++	Linear_System.types.hh Bit_Row.types.hh Bit_Matrix.types.hh \
++	Constraint_System.types.hh Generator_System.types.hh \
++	Grid_Generator_System.types.hh Congruence_System.types.hh \
++	Scalar_Products.types.hh MIP_Problem.types.hh \
++	Poly_Con_Relation.types.hh Poly_Gen_Relation.types.hh \
++	BHRZ03_Certificate.types.hh H79_Certificate.types.hh \
++	Grid_Certificate.types.hh Polyhedron.types.hh \
++	C_Polyhedron.types.hh NNC_Polyhedron.types.hh Grid.types.hh \
++	Ptr_Iterator.types.hh DB_Row.types.hh DB_Matrix.types.hh \
++	BD_Shape.types.hh OR_Matrix.types.hh Octagonal_Shape.types.hh \
++	fpu.types.hh Float.defs.hh Float.inlines.hh C_Integer.hh \
++	fpu.defs.hh fpu-c99.inlines.hh fpu-ia32.inlines.hh \
++	fpu-none.inlines.hh fpu-sparc.inlines.hh Rounding_Dir.defs.hh \
++	Rounding_Dir.inlines.hh Result.defs.hh Result.inlines.hh \
++	Numeric_Format.defs.hh checked.defs.hh checked.inlines.hh \
++	checked_int.inlines.hh checked_float.inlines.hh \
++	checked_mpz.inlines.hh checked_mpq.inlines.hh \
++	checked_ext.inlines.hh Checked_Number.defs.hh \
++	Checked_Number.inlines.hh Checked_Number.templates.hh \
++	checked_numeric_limits.hh GMP_Integer.defs.hh \
++	GMP_Integer.inlines.hh Coefficient.defs.hh \
++	Coefficient.inlines.hh stdiobuf.defs.hh stdiobuf.inlines.hh \
++	c_streambuf.defs.hh c_streambuf.inlines.hh globals.defs.hh \
++	globals.inlines.hh math_utilities.defs.hh \
++	math_utilities.inlines.hh iterator_to_const.defs.hh \
++	iterator_to_const.inlines.hh distances.defs.hh \
++	distances.inlines.hh Boundary.defs.hh Interval_Info.defs.hh \
++	Interval_Info.inlines.hh Interval_Restriction.defs.hh \
++	Interval.defs.hh Interval.inlines.hh Interval.templates.hh \
++	Box.defs.hh Box_Status.inlines.hh Box.inlines.hh \
++	Box.templates.hh Rational_Interval.hh Rational_Box.hh \
++	Variable.defs.hh Variable.inlines.hh Variables_Set.defs.hh \
++	Variables_Set.inlines.hh Init.defs.hh Init.inlines.hh \
++	initializer.hh Topology.hh Row.defs.hh Row.inlines.hh \
++	Linear_Row.defs.hh Linear_Row.inlines.hh Matrix.defs.hh \
++	Matrix.inlines.hh Bit_Row.defs.hh Bit_Row.inlines.hh \
++	Linear_System.defs.hh Linear_System.inlines.hh \
++	Bit_Matrix.defs.hh Bit_Matrix.inlines.hh \
++	Constraint_System.defs.hh Generator_System.defs.hh \
++	Grid_Generator_System.defs.hh Congruence_System.defs.hh \
++	Linear_Expression.defs.hh Linear_Expression.inlines.hh \
++	Constraint.defs.hh Constraint.inlines.hh \
++	Constraint_System.inlines.hh Generator.defs.hh \
++	Generator.inlines.hh Grid_Generator.defs.hh \
++	Grid_Generator.inlines.hh Congruence.defs.hh \
++	Congruence.inlines.hh Generator_System.inlines.hh \
++	Grid_Generator_System.inlines.hh Congruence_System.inlines.hh \
++	Scalar_Products.defs.hh Scalar_Products.inlines.hh \
++	MIP_Problem.defs.hh MIP_Problem.inlines.hh \
++	MIP_Problem.templates.hh Poly_Con_Relation.defs.hh \
++	Poly_Con_Relation.inlines.hh Poly_Gen_Relation.defs.hh \
++	Poly_Gen_Relation.inlines.hh BHRZ03_Certificate.defs.hh \
++	BHRZ03_Certificate.inlines.hh H79_Certificate.defs.hh \
++	H79_Certificate.inlines.hh Grid_Certificate.defs.hh \
++	Grid_Certificate.inlines.hh Polyhedron.defs.hh \
++	Ph_Status.inlines.hh Polyhedron.inlines.hh \
++	Polyhedron.templates.hh Grid.defs.hh Grid_Status.inlines.hh \
++	Grid.inlines.hh Grid.templates.hh C_Polyhedron.defs.hh \
++	C_Polyhedron.inlines.hh NNC_Polyhedron.defs.hh \
++	NNC_Polyhedron.inlines.hh Widening_Function.types.hh \
++	Widening_Function.defs.hh Widening_Function.inlines.hh \
++	Ptr_Iterator.defs.hh Ptr_Iterator.inlines.hh DB_Row.defs.hh \
++	DB_Row.inlines.hh DB_Row.templates.hh DB_Matrix.defs.hh \
++	DB_Matrix.inlines.hh DB_Matrix.templates.hh BD_Shape.defs.hh \
++	BDS_Status.inlines.hh BD_Shape.inlines.hh \
++	BD_Shape.templates.hh OR_Matrix.defs.hh OR_Matrix.inlines.hh \
++	OR_Matrix.templates.hh Octagonal_Shape.defs.hh \
++	Og_Status.inlines.hh Octagonal_Shape.inlines.hh \
++	Octagonal_Shape.templates.hh Determinate.types.hh \
++	Determinate.defs.hh Determinate.inlines.hh Powerset.types.hh \
++	Powerset.defs.hh Powerset.inlines.hh Powerset.templates.hh \
++	Pointset_Powerset.types.hh Pointset_Powerset.defs.hh \
++	Pointset_Powerset.inlines.hh Pointset_Powerset.templates.hh \
++	Partially_Reduced_Product.types.hh \
++	Partially_Reduced_Product.defs.hh \
++	Partially_Reduced_Product.inlines.hh \
++	Partially_Reduced_Product.templates.hh max_space_dimension.hh \
++	algorithms.hh wrap.hh Ph_Status.idefs.hh Grid_Status.idefs.hh \
++	Box_Status.idefs.hh BDS_Status.idefs.hh Og_Status.idefs.hh \
++	swapping_sort.icc wrap.cc
++am__objects_3 = Box.lo checked.lo Checked_Number.lo Float.lo \
++	fpu-ia32.lo Constraint.lo Constraint_System.lo Congruence.lo \
++	Congruence_System.lo Generator_System.lo \
++	Grid_Generator_System.lo Generator.lo Grid_Generator.lo \
++	Init.lo Coefficient.lo Linear_Expression.lo Linear_System.lo \
++	Matrix.lo Scalar_Products.lo MIP_Problem.lo \
++	Poly_Con_Relation.lo Poly_Gen_Relation.lo \
++	BHRZ03_Certificate.lo H79_Certificate.lo Grid_Certificate.lo \
++	Polyhedron_nonpublic.lo Polyhedron_public.lo \
++	Polyhedron_chdims.lo Polyhedron_widenings.lo C_Polyhedron.lo \
++	NNC_Polyhedron.lo Grid_nonpublic.lo Grid_public.lo \
++	Grid_chdims.lo Grid_widenings.lo BD_Shape.lo \
++	Octagonal_Shape.lo Pointset_Powerset.lo Row.lo Linear_Row.lo \
++	Bit_Matrix.lo Bit_Row.lo Ph_Status.lo Grid_Status.lo \
++	Variable.lo Variables_Set.lo conversion.lo minimize.lo \
++	simplify.lo Grid_conversion.lo Grid_simplify.lo stdiobuf.lo \
++	c_streambuf.lo globals.lo mp_std_bits.lo version.lo \
++	$(am__objects_2) $(am__objects_1) wrap.lo
++am_libppl_convenience_la_OBJECTS = $(am__objects_3)
++libppl_convenience_la_OBJECTS = $(am_libppl_convenience_la_OBJECTS)
+ binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
+ PROGRAMS = $(bin_PROGRAMS)
+ am_ppl_config_OBJECTS = BUGS.$(OBJEXT) COPYING.$(OBJEXT) \
+@@ -302,9 +433,11 @@ CCLD = $(CC)
+ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+ 	$(LDFLAGS) -o $@
+-SOURCES = $(libppl_la_SOURCES) $(ppl_config_SOURCES) \
+-	$(nodist_ppl_config_SOURCES)
+-DIST_SOURCES = $(am__libppl_la_SOURCES_DIST) $(ppl_config_SOURCES)
++SOURCES = $(libppl_la_SOURCES) $(libppl_convenience_la_SOURCES) \
++	$(ppl_config_SOURCES) $(nodist_ppl_config_SOURCES)
++DIST_SOURCES = $(am__libppl_la_SOURCES_DIST) \
++	$(am__libppl_convenience_la_SOURCES_DIST) \
++	$(ppl_config_SOURCES)
+ am__include_HEADERS_DIST = ppl.hh
+ includeHEADERS_INSTALL = $(INSTALL_HEADER)
+ am__noinst_HEADERS_DIST = ppl.hh
+@@ -501,6 +634,7 @@ AM_CPPFLAGS = \
+ @extra_includes@
+ 
+ lib_LTLIBRARIES = libppl.la
++noinst_LTLIBRARIES = libppl_convenience.la
+ ppl_config_SOURCES = \
+ BUGS.cc \
+ COPYING.cc \
+@@ -825,8 +959,10 @@ swapping_sort.icc \
+ wrap.cc
+ 
+ #Pointset_Ask_Tell.cc
++libppl_convenience_la_SOURCES = $(libppl_la_SOURCES)
+ @NO_UNDEFINED_TRUE@NO_UNDEFINED_FLAG = -no-undefined
+ libppl_la_LIBADD = @extra_libraries@
++libppl_convenience_la_LIBADD = $(libppl_la_LIBADD)
+ libppl_la_LDFLAGS = \
+ $(NO_UNDEFINED_FLAG) \
+ -version-info $(LIBPPL_LT_CURRENT):$(LIBPPL_LT_REVISION):$(LIBPPL_LT_AGE)
+@@ -911,8 +1047,19 @@ clean-libLTLIBRARIES:
+ 	  echo "rm -f \"$${dir}/so_locations\""; \
+ 	  rm -f "$${dir}/so_locations"; \
+ 	done
++
++clean-noinstLTLIBRARIES:
++	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
++	@list='$(noinst_LTLIBRARIES)'; for p in $$list; do \
++	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
++	  test "$$dir" != "$$p" || dir=.; \
++	  echo "rm -f \"$${dir}/so_locations\""; \
++	  rm -f "$${dir}/so_locations"; \
++	done
+ libppl.la: $(libppl_la_OBJECTS) $(libppl_la_DEPENDENCIES) 
+ 	$(libppl_la_LINK) -rpath $(libdir) $(libppl_la_OBJECTS) $(libppl_la_LIBADD) $(LIBS)
++libppl_convenience.la: $(libppl_convenience_la_OBJECTS) $(libppl_convenience_la_DEPENDENCIES) 
++	$(CXXLINK)  $(libppl_convenience_la_OBJECTS) $(libppl_convenience_la_LIBADD) $(LIBS)
+ install-binPROGRAMS: $(bin_PROGRAMS)
+ 	@$(NORMAL_INSTALL)
+ 	test -z "$(bindir)" || $(MKDIR_P) "$(DESTDIR)$(bindir)"
+@@ -1173,7 +1320,7 @@ maintainer-clean-generic:
+ clean: clean-am
+ 
+ clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
+-	clean-libtool mostlyclean-am
++	clean-libtool clean-noinstLTLIBRARIES mostlyclean-am
+ 
+ distclean: distclean-am
+ 	-rm -rf ./$(DEPDIR)
+@@ -1233,12 +1380,13 @@ uninstall-am: uninstall-binPROGRAMS unin
+ .MAKE: install-am install-strip
+ 
+ .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
+-	clean-generic clean-libLTLIBRARIES clean-libtool ctags \
+-	dist-hook distclean distclean-compile distclean-generic \
+-	distclean-libtool distclean-tags distdir dvi dvi-am html \
+-	html-am info info-am install install-am install-binPROGRAMS \
+-	install-data install-data-am install-dvi install-dvi-am \
+-	install-exec install-exec-am install-html install-html-am \
++	clean-generic clean-libLTLIBRARIES clean-libtool \
++	clean-noinstLTLIBRARIES ctags dist-hook distclean \
++	distclean-compile distclean-generic distclean-libtool \
++	distclean-tags distdir dvi dvi-am html html-am info info-am \
++	install install-am install-binPROGRAMS install-data \
++	install-data-am install-dvi install-dvi-am install-exec \
++	install-exec-am install-html install-html-am \
+ 	install-includeHEADERS install-info install-info-am \
+ 	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
+ 	install-ps install-ps-am install-strip installcheck \
+--- ppl-0.10.1/src/Makefile.am.jj	2009-04-14 07:08:17.000000000 +0200
++++ ppl-0.10.1/src/Makefile.am	2009-06-04 12:43:10.000000000 +0200
+@@ -64,6 +64,7 @@ AM_CPPFLAGS = \
+ @extra_includes@
+ 
+ lib_LTLIBRARIES = libppl.la
++noinst_LTLIBRARIES = libppl_convenience.la
+ 
+ bin_PROGRAMS = ppl-config
+ 
+@@ -406,6 +407,8 @@ swapping_sort.icc \
+ wrap.cc
+ #Pointset_Ask_Tell.cc
+ 
++libppl_convenience_la_SOURCES = $(libppl_la_SOURCES)
++
+ if NO_UNDEFINED
+ 
+ NO_UNDEFINED_FLAG = -no-undefined
+@@ -413,6 +416,7 @@ NO_UNDEFINED_FLAG = -no-undefined
+ endif NO_UNDEFINED
+ 
+ libppl_la_LIBADD = @extra_libraries@
++libppl_convenience_la_LIBADD = $(libppl_la_LIBADD)
+ 
+ libppl_la_LDFLAGS = \
+ $(NO_UNDEFINED_FLAG) \
+--- ppl-0.10.1/interfaces/C/Makefile.in.jj	2009-04-14 07:08:44.000000000 +0200
++++ ppl-0.10.1/interfaces/C/Makefile.in	2009-06-04 12:43:17.000000000 +0200
+@@ -100,7 +100,7 @@ am__vpath_adj = case $$p in \
+ am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
+ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)"
+ libLTLIBRARIES_INSTALL = $(INSTALL)
+-LTLIBRARIES = $(lib_LTLIBRARIES)
++LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES)
+ am_libppl_c_la_OBJECTS = ppl_c_implementation_common.lo
+ nodist_libppl_c_la_OBJECTS =
+ libppl_c_la_OBJECTS = $(am_libppl_c_la_OBJECTS) \
+@@ -108,6 +108,11 @@ libppl_c_la_OBJECTS = $(am_libppl_c_la_O
+ libppl_c_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+ 	$(CXXFLAGS) $(libppl_c_la_LDFLAGS) $(LDFLAGS) -o $@
++am__DEPENDENCIES_1 = $(top_builddir)/src/libppl.la
++am__objects_1 = ppl_c_implementation_common.lo
++am_libppl_c_convenience_la_OBJECTS = $(am__objects_1)
++libppl_c_convenience_la_OBJECTS =  \
++	$(am_libppl_c_convenience_la_OBJECTS)
+ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+ depcomp = $(SHELL) $(top_srcdir)/depcomp
+ am__depfiles_maybe = depfiles
+@@ -130,8 +135,10 @@ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLF
+ 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+ 	$(LDFLAGS) -o $@
+ SOURCES = $(libppl_c_la_SOURCES) $(nodist_libppl_c_la_SOURCES) \
+-	$(nodist_EXTRA_libppl_c_la_SOURCES)
+-DIST_SOURCES = $(libppl_c_la_SOURCES)
++	$(nodist_EXTRA_libppl_c_la_SOURCES) \
++	$(libppl_c_convenience_la_SOURCES)
++DIST_SOURCES = $(libppl_c_la_SOURCES) \
++	$(libppl_c_convenience_la_SOURCES)
+ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
+ 	html-recursive info-recursive install-data-recursive \
+ 	install-dvi-recursive install-exec-recursive \
+@@ -397,11 +404,13 @@ AM_CPPFLAGS = \
+ @extra_includes@
+ 
+ lib_LTLIBRARIES = libppl_c.la
++noinst_LTLIBRARIES = libppl_c_convenience.la
+ libppl_c_la_SOURCES = \
+ ppl_c_implementation_common.defs.hh \
+ ppl_c_implementation_common.inlines.hh \
+ ppl_c_implementation_common.cc
+ 
++libppl_c_convenience_la_SOURCES = $(libppl_c_la_SOURCES)
+ nodist_libppl_c_la_SOURCES = 
+ nodist_EXTRA_libppl_c_la_SOURCES = \
+ ppl_c_Int8_Box.cc \
+@@ -482,9 +491,11 @@ libppl_c_la_LIBADD = \
+ $(top_builddir)/src/libppl.la \
+ @extra_libraries@
+ 
++libppl_c_convenience_la_LIBADD = $(libppl_c_la_LIBADD)
+ libppl_c_la_DEPENDENCIES = \
+ @required_instantiations_c_cxx_objects@
+ 
++libppl_c_convenience_la_DEPENDENCIES = $(libppl_c_la_DEPENDENCIES)
+ libppl_c_la_LDFLAGS = \
+ $(NO_UNDEFINED_FLAG) \
+ -version-info $(LIBPPL_C_LT_CURRENT):$(LIBPPL_C_LT_REVISION):$(LIBPPL_C_LT_AGE)
+@@ -571,8 +582,19 @@ clean-libLTLIBRARIES:
+ 	  echo "rm -f \"$${dir}/so_locations\""; \
+ 	  rm -f "$${dir}/so_locations"; \
+ 	done
++
++clean-noinstLTLIBRARIES:
++	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
++	@list='$(noinst_LTLIBRARIES)'; for p in $$list; do \
++	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
++	  test "$$dir" != "$$p" || dir=.; \
++	  echo "rm -f \"$${dir}/so_locations\""; \
++	  rm -f "$${dir}/so_locations"; \
++	done
+ libppl_c.la: $(libppl_c_la_OBJECTS) $(libppl_c_la_DEPENDENCIES) 
+ 	$(libppl_c_la_LINK) -rpath $(libdir) $(libppl_c_la_OBJECTS) $(libppl_c_la_LIBADD) $(LIBS)
++libppl_c_convenience.la: $(libppl_c_convenience_la_OBJECTS) $(libppl_c_convenience_la_DEPENDENCIES) 
++	$(CXXLINK)  $(libppl_c_convenience_la_OBJECTS) $(libppl_c_convenience_la_LIBADD) $(LIBS)
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+@@ -911,7 +933,7 @@ maintainer-clean-generic:
+ clean: clean-recursive
+ 
+ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
+-	mostlyclean-am
++	clean-noinstLTLIBRARIES mostlyclean-am
+ 
+ distclean: distclean-recursive
+ 	-rm -rf ./$(DEPDIR)
+@@ -972,19 +994,19 @@ uninstall-am: uninstall-libLTLIBRARIES u
+ 
+ .PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
+ 	all all-am check check-am clean clean-generic \
+-	clean-libLTLIBRARIES clean-libtool ctags ctags-recursive \
+-	distclean distclean-compile distclean-generic \
+-	distclean-libtool distclean-tags distdir dvi dvi-am html \
+-	html-am info info-am install install-am install-data \
+-	install-data-am install-dvi install-dvi-am install-exec \
+-	install-exec-am install-html install-html-am install-info \
+-	install-info-am install-libLTLIBRARIES install-man \
+-	install-nodist_includeHEADERS install-pdf install-pdf-am \
+-	install-ps install-ps-am install-strip installcheck \
+-	installcheck-am installdirs installdirs-am maintainer-clean \
+-	maintainer-clean-generic mostlyclean mostlyclean-compile \
+-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+-	tags tags-recursive uninstall uninstall-am \
++	clean-libLTLIBRARIES clean-libtool clean-noinstLTLIBRARIES \
++	ctags ctags-recursive distclean distclean-compile \
++	distclean-generic distclean-libtool distclean-tags distdir dvi \
++	dvi-am html html-am info info-am install install-am \
++	install-data install-data-am install-dvi install-dvi-am \
++	install-exec install-exec-am install-html install-html-am \
++	install-info install-info-am install-libLTLIBRARIES \
++	install-man install-nodist_includeHEADERS install-pdf \
++	install-pdf-am install-ps install-ps-am install-strip \
++	installcheck installcheck-am installdirs installdirs-am \
++	maintainer-clean maintainer-clean-generic mostlyclean \
++	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
++	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
+ 	uninstall-libLTLIBRARIES uninstall-nodist_includeHEADERS
+ 
+ 
+--- ppl-0.10.1/interfaces/C/Makefile.am.jj	2009-04-14 07:08:17.000000000 +0200
++++ ppl-0.10.1/interfaces/C/Makefile.am	2009-06-04 12:42:31.000000000 +0200
+@@ -119,11 +119,13 @@ AM_CPPFLAGS = \
+ @extra_includes@
+ 
+ lib_LTLIBRARIES = libppl_c.la
++noinst_LTLIBRARIES = libppl_c_convenience.la
+ 
+ libppl_c_la_SOURCES = \
+ ppl_c_implementation_common.defs.hh \
+ ppl_c_implementation_common.inlines.hh \
+ ppl_c_implementation_common.cc
++libppl_c_convenience_la_SOURCES = $(libppl_c_la_SOURCES)
+ 
+ nodist_libppl_c_la_SOURCES =
+ 
+@@ -211,9 +213,13 @@ libppl_c_la_LIBADD = \
+ $(top_builddir)/src/libppl.la \
+ @extra_libraries@
+ 
++libppl_c_convenience_la_LIBADD = $(libppl_c_la_LIBADD)
++
+ libppl_c_la_DEPENDENCIES = \
+ @required_instantiations_c_cxx_objects@
+ 
++libppl_c_convenience_la_DEPENDENCIES = $(libppl_c_la_DEPENDENCIES)
++
+ libppl_c_la_LDFLAGS = \
+ $(NO_UNDEFINED_FLAG) \
+ -version-info $(LIBPPL_C_LT_CURRENT):$(LIBPPL_C_LT_REVISION):$(LIBPPL_C_LT_AGE)
